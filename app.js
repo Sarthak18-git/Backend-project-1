@@ -1,14 +1,7 @@
 const express = require("express");
 
 const app = express();
-
+const noteroutes = require("./routes/note.routes");
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "Backend is running",
-  });
-});
-
+app.use("/api",noteroutes);
 module.exports = app;

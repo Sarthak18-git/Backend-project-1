@@ -10,10 +10,7 @@ const createNote=async (req,res)=>{
         });
     }
     catch(error){
-        res.status(500).json({
-           success: false,
-           message: error.message,
-       });
+        next();
     }
 };
 const getAllNotes=async (req,res)=>{
@@ -26,10 +23,7 @@ const getAllNotes=async (req,res)=>{
         }); 
     }
     catch(err){
-        res.status(500).json({
-            success:false,
-            message:err.message,
-        });
+         next();
     }
 }
 const deleteNote=async(req,res)=>{
@@ -43,10 +37,7 @@ const deleteNote=async(req,res)=>{
         });
     }
     catch(err){
-        res.status(500).json({
-            success:false,
-            message:err.message,
-        });
+         next();
     }
   }
   const updateNote=async(req,res)=>{
@@ -76,10 +67,7 @@ const deleteNote=async(req,res)=>{
          });
       }
       catch(err){
-        res.status(500).json({
-            success:false,
-            message:err.message,
-        });
+         next();
       }
   }
 

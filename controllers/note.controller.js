@@ -1,33 +1,23 @@
 const Note=require("../models/note.model");
-const createNote=async (req,res)=>{
-    try{
-        const{title,description}=req.body;
-        const note=await Note.create({title,description});
-        res.status(201).json({
+const asyncHandler=require("../utils/asyncHandler");
+const createNote=asyncHandler(async (req,res)=>{
+    const{title,description}=req.body;
+    const note=await Note.create({title,description});
+    res.status(201).json({
             success:true,
             message:"Note created successfully",
             note
         });
-    }
-    catch(error){
-        next();
-    }
-};
-const getAllNotes=async (req,res)=>{
-    try{
+    });
+const getAllNotes=asyncHandler(async (req,res)=>{
         const notes=await Note.find();
         res.status(201).json({
             success:true,
             message:"all notes fetched",
             notes
         }); 
-    }
-    catch(err){
-         next();
-    }
-}
-const deleteNote=async(req,res)=>{
-    try{
+    });
+const deleteNote=asyncHandler(async (req,res)=>{
         const {id}=req.params;
         const note=await Note.deleteOne({ _id: id });
         res.status(200).json({
@@ -35,13 +25,8 @@ const deleteNote=async(req,res)=>{
             message:"Note deleted successfully",
             note
         });
-    }
-    catch(err){
-         next();
-    }
-  }
-  const updateNote=async(req,res)=>{
-      try{
+    });
+  const updateNote=asyncHandler(async (req,res)=>{
          const {id}=req.params;
          const {title,description}=req.body;
          const result=await Note.updateOne({_id:id},
@@ -65,10 +50,6 @@ const deleteNote=async(req,res)=>{
             message:"Note updated successfully",
             result
          });
-      }
-      catch(err){
-         next();
-      }
-  }
+        });
 
 module.exports= {createNote, getAllNotes,deleteNote,updateNote};
